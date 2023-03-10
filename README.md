@@ -1,16 +1,54 @@
 # demo_semantics
 
-A new Flutter project.
+A sample App to demonstrate issues faced with Screen Readers on Web
 
-## Getting Started
 
-This project is a starting point for a Flutter application.
 
-A few resources to get you started if this is your first Flutter project:
+## Setup
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+**Step 1:**
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Download or clone this repo:
+
+
+**Step 2:**
+
+Go to project root and execute the following command in terminal to get the required dependencies: 
+
+```
+flutter pub get 
+```
+
+## Run on web
+
+Go to project root and execute the following command in terminal to run the app in chrome browser
+
+```
+flutter run -d chrome 
+```
+
+## Issues with web screen readers
+## Issues need to be resolved on Mac and Windows on Chrome, Safari and Edge browser
+
+**1: Text Form Field**
+1. Text Form fields do not get a focus
+2. On windows using NVDA, user is not able set focus or remove focus. Focus on actionable widgets can be set only using Tab button
+3. Validation error are only read the first time user clicks the submit button
+
+**2: Alert Dialog**
+1. Focus of alert dialog is not automatically set to title.
+2. User is not aware that dialog box is opened since it is not announced by the screen reader
+
+**3: Date Picker**
+1. When screen reader in enabled on web, if the first 3 rows of dates are disabled, user cannot select any valid date \nIn this example, user cannot select dates 23rd to 31st
+
+**4: Snack Bar**
+1. Snack bars are not read out by windows screen readers NVDA
+
+**5: Detecting if screen reader is enabled**
+1. On web, we are unable to detect if screen readers are enabled using mediaQueryData.accessibleNavigation.
+Value is always returned as enabled.
+The mediaQueryData.accessibleNavigation return correct value on mobile app 
+
+**6: Auto Scrolling with Screen Readers On**
+1. When screen readers are activated, the pages do not always auto scroll to the elements beyond the visible area of the browser. This happens even when the reader announces the semantics for the element that is outside the currently visible area
